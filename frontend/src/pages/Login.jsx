@@ -28,8 +28,8 @@ function Login() {
       );
 
       localStorage.setItem(
-        "token",
-        data.token
+        "user",
+        JSON.stringify(data)
       );
 
       login(data);
