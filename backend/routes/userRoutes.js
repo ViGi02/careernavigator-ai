@@ -3,6 +3,8 @@ const express = require("express");
 const {
   getProfile,
   addSkill,
+  deleteSkill,
+  updateCareerGoal,
 } = require("../controllers/userController");
 
 const {
@@ -14,5 +16,9 @@ const router = express.Router();
 router.get("/profile", protect, getProfile);
 
 router.post("/skills", protect, addSkill);
+
+router.delete("/skills", protect, deleteSkill);
+
+router.put("/career-goal", protect, updateCareerGoal);
 
 module.exports = router;

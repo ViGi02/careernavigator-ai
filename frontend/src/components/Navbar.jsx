@@ -24,6 +24,14 @@ function Navbar() {
         Profile
       </Link>
 
+      <Link to="/job-matcher">
+        Job Matcher
+      </Link>
+
+      <Link to="/cv-analyzer">
+        CV Analyzer
+      </Link>
+
       {user && (
         <button onClick={handleLogout}>
           Logout

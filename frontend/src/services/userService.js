@@ -34,3 +34,39 @@ export const addSkill = async (
 
   return response.data;
 };
+
+export const deleteSkill = async (
+  skill,
+  token
+) => {
+  const response = await axios.delete(
+    `${API_URL}/skills`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: { skill },
+    }
+  );
+
+  return response.data;
+};
+
+export const updateCareerGoal =
+  async (
+    careerGoal,
+    token
+  ) => {
+    const response =
+      await axios.put(
+        `${API_URL}/career-goal`,
+        { careerGoal },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+    return response.data;
+  };

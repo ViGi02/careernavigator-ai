@@ -6,6 +6,9 @@ const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const matchRoutes = require("./routes/matchRoutes");
+const roadmapRoutes = require("./routes/roadmapRoutes");
+const cvRoutes = require("./routes/cvRoutes");
 
 dotenv.config();
 
@@ -14,9 +17,14 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/match", matchRoutes);
+app.use("/api/roadmap", roadmapRoutes);
+app.use("/api/cv", cvRoutes);
+
 app.get("/", (req, res) => {
   res.send("CareerNavigator API Running");
 });
