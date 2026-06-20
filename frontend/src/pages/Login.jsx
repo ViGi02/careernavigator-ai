@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { loginUser } from "../services/authService";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -19,17 +19,26 @@ function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fakeUser = {
-      name: "Unathi",
-      email: formData.email,
-    };
+    try {
+      const data = await loginUser(
+        formData
+      );
 
-    login(fakeUser);
+      localStorage.setItem(
+        "token",
+        data.token
+      );
 
-    navigate("/dashboard");
+      login(data);
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert("Login failed");
+    }
   };
 
   return (
@@ -68,9 +77,9 @@ function Login() {
 
         <p className="mt-4 text-center">
           No account?{" "}
-          <Link to="/register" className="text-blue-600">
+          <useNavigate to="/register" className="text-blue-600">
             Register
-          </Link>
+          </useNavigate>
         </p>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../services/authService";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function Register() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -15,10 +18,27 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Register data:", formData);
+
+    try {
+      const data = await registerUser(
+        formData
+      );
+
+      console.log(data);
+
+      alert("Registration successful");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      
+      alert(
+        error.response?.data?.message ||
+        "Registration failed"
+      );
+    }
   };
 
   return (
@@ -66,9 +86,9 @@ function Register() {
 
         <p className="mt-4 text-center">
           Already have an account?{" "}
-          <Link to="/" className="text-blue-600">
+          <useNavigate to="/" className="text-blue-600">
             Login
-          </Link>
+          </useNavigate>
         </p>
       </div>
     </div>
