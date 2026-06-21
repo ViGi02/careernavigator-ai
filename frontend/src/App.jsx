@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import JobMatcher from "./pages/JobMatcher";
 import CVAnalyzer from "./pages/CVAnalyzer";
+import MyRoadmaps from "./pages/MyRoadmaps";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -47,6 +48,15 @@ function App() {
           element={
             <ProtectedRoute>
               <CVAnalyzer />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/roadmaps"
+          element={
+            <ProtectedRoute>
+              <MyRoadmaps />
             </ProtectedRoute>
           }
         />

@@ -32,6 +32,13 @@ function Navbar() {
         CV Analyzer
       </Link>
 
+      <Link
+        to="/roadmaps"
+        className="text-white"
+      >
+        My Roadmaps
+      </Link>
+
       {user && (
         <button onClick={handleLogout}>
           Logout

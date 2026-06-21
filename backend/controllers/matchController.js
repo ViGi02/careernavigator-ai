@@ -16,6 +16,10 @@ const Match = require(
   "../models/Match"
 );
 
+const extractJobTitle = require(
+  "../services/extractJobTitle"
+);
+
 const analyzeMatch = async (
   req,
   res
@@ -23,6 +27,8 @@ const analyzeMatch = async (
   try {
     const { jobDescription } =
       req.body;
+
+    const jobTitle = extractJobTitle(jobDescription);
 
     const user =
       await User.findById(
@@ -92,6 +98,7 @@ const analyzeMatch = async (
 
     await Match.create({
       user: req.user.id,
+      jobTitle,
       score,
       matchedSkills,
       missingSkills,

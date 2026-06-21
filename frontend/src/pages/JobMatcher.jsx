@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { analyzeMatch } from "../services/matchService";
-import { generateRoadmap } from "../services/roadmapService";
+import { generateRoadmap, saveRoadmap } from "../services/roadmapService";
 
 function JobMatcher() {
   const [jobDescription, setJobDescription] =
@@ -39,6 +39,29 @@ function JobMatcher() {
       console.log(error);
     }
   };
+
+  const handleSaveRoadmap =
+    async () => {
+      try {
+
+        await saveRoadmap(
+          results?.careerTracks?.length > 0
+            ? `${results.careerTracks[0]} Roadmap`
+            : "Learning Plan",
+          roadmap,
+          user.token
+        );
+
+        alert(
+          "Roadmap saved"
+        );
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+    };
 
   return (
     <div className="p-6">
@@ -171,6 +194,22 @@ function JobMatcher() {
               )
             )}
           </ul>
+
+          <button
+            onClick={
+              handleSaveRoadmap
+            }
+            className="
+              bg-green-600
+              text-white
+              px-4
+              py-2
+              rounded
+              mt-4
+            "
+          >
+            Save Roadmap
+          </button>
         </div>
       )}
     </div>
