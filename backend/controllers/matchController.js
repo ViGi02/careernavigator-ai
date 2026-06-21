@@ -1,6 +1,15 @@
 const User = require("../models/User");
+
 const extractSkills = require(
   "../services/skillExtractor"
+);
+
+const classifyJob = require(
+  "../services/jobClassifier"
+);
+
+const technicalSkills = require(
+  "../services/isTechnicalSkill"
 );
 
 const analyzeMatch = async (
@@ -18,6 +27,13 @@ const analyzeMatch = async (
 
     const jobSkills =
       extractSkills(
+        jobDescription).filter(
+          (skill) =>
+            technicalSkills.includes(skill)
+      );
+
+    const careerTracks =
+      classifyJob(
         jobDescription
       );
 
@@ -46,6 +62,7 @@ const analyzeMatch = async (
       score,
       matchedSkills,
       missingSkills,
+      careerTracks,
     });
   } catch (error) {
     res.status(500).json({

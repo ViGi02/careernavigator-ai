@@ -150,6 +150,79 @@ function CVAnalyzer() {
         </div>
       )}
 
+      {result.categories && (
+        <div className="mt-6">
+
+          <h2 className="text-xl font-bold">
+            Skill Categories
+          </h2>
+
+          <div className="mt-4">
+
+            <p>
+              <strong>Frontend:</strong>
+            </p>
+
+            <ul>
+              {result.categories.frontend.map(
+                (skill) => (
+                  <li key={skill}>
+                    ✅ {skill}
+                  </li>
+                )
+              )}
+            </ul>
+
+            <p className="mt-4">
+              <strong>Backend:</strong>
+            </p>
+
+            <ul>
+              {result.categories.backend.map(
+                (skill) => (
+                  <li key={skill}>
+                    ✅ {skill}
+                  </li>
+                )
+              )}
+            </ul>
+
+            <p className="mt-4">
+              <strong>Database:</strong>
+            </p>
+
+            <ul>
+              {result.categories.database.map(
+                (skill) => (
+                  <li key={skill}>
+                    ✅ {skill}
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {result.recommendations?.length > 0 && (
+        <div className="mt-6">
+
+          <h2 className="font-bold">
+            Recommended Skills
+          </h2>
+
+          <ul>
+            {result.recommendations.map(
+              (skill) => (
+                <li key={skill}>
+                  ⚠ {skill}
+                </li>
+              )
+            )}
+          </ul>
+
+        </div>
+      )}
     </div>
   );
 }

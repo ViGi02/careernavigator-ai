@@ -83,17 +83,61 @@ const skillsDatabase = [
   "PowerShell",
   "VPN",
   "Remote Desktop",
+  "Business Analysis",
+  "Software Development",
+  "Business Intelligence",
+  "Data Engineering",
+  "IT Consulting",
+  "Problem Solving",
+  "Documentation",
+  "Requirements Gathering",
+  "Stakeholder Management",
+  "Data Analytics",
+  "Consulting",
+  "Agile",
+  "Scrum",
+  "Software Engineering",
+  "Systems Analysis",
+  "Informatics",
 ];
 
 const extractSkills = (text) => {
-  return skillsDatabase.filter(
-    (skill) =>
-      text
-        .toLowerCase()
-        .includes(
-          skill.toLowerCase()
-        )
+  const lowerText =
+    text.toLowerCase();
+
+  const foundSkills = [];
+
+  skillsDatabase.forEach(
+    (skill) => {
+      if (
+        typeof skill === "string"
+      ) {
+        if (
+          lowerText.includes(
+            skill.toLowerCase()
+          )
+        ) {
+          foundSkills.push(skill);
+        }
+      } else {
+        const match =
+          skill.aliases.some(
+            (alias) =>
+              lowerText.includes(
+                alias.toLowerCase()
+              )
+          );
+
+        if (match) {
+          foundSkills.push(
+            skill.name
+          );
+        }
+      }
+    }
   );
+
+  return foundSkills;
 };
 
 module.exports = extractSkills;

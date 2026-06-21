@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 
 function Login() {
@@ -77,9 +77,9 @@ function Login() {
 
         <p className="mt-4 text-center">
           No account?{" "}
-          <useNavigate to="/register" className="text-blue-600">
+          <Link to="/register" className="text-blue-600">
             Register
-          </useNavigate>
+          </Link>
         </p>
       </div>
     </div>

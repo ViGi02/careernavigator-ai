@@ -114,6 +114,24 @@ function JobMatcher() {
         </p>
       )}
 
+      {results?.careerTracks?.length > 0 && (
+        <div className="mt-4">
+          <h3 className="font-bold">
+            Career Paths Detected
+          </h3>
+
+          <ul>
+            {results?.careerTracks?.map(
+              (track) => (
+                <li key={track}>
+                  🎯 {track}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      )}
+
       {roadmap.length > 0 && (
         <div className="mt-6">
           <h3 className="font-bold text-xl">

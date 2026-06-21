@@ -1,4 +1,5 @@
 const fs = require("fs");
+
 const pdfParse =
   require("pdf-parse");
 
@@ -8,6 +9,15 @@ const mammoth =
 const extractSkills = require(
   "../services/skillExtractor"
 );
+
+const categorizeSkills = require(
+  "../services/skillCategorizer"
+);
+
+const recommendSkills =
+  require(
+    "../services/recommendSkills"
+  );
 
 const analyzeTextCV = async (
   req,
@@ -70,6 +80,12 @@ const analyzeCV = async (
     const skills =
       extractSkills(text);
 
+    const categories =
+      categorizeSkills(skills);
+
+    const recommendations =
+      recommendSkills(categories);
+
     res.json({
       extractedText:
         text.substring(
@@ -77,6 +93,8 @@ const analyzeCV = async (
           1000
         ),
       skills,
+      categories,
+      recommendations,
     });
   } catch (error) {
     res.status(500).json({
