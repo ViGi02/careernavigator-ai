@@ -8,6 +8,7 @@ const upload =
 
 const {
   analyzeCV,
+  analyzeTextCV,
 } = require(
   "../controllers/cvController"
 );
@@ -26,6 +27,12 @@ router.post(
   protect,
   upload.single("cv"),
   analyzeCV
+);
+
+router.post(
+  "/analyze-text",
+  protect,
+  analyzeTextCV
 );
 
 module.exports = router;

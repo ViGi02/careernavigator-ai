@@ -9,6 +9,26 @@ const extractSkills = require(
   "../services/skillExtractor"
 );
 
+const analyzeTextCV = async (
+  req,
+  res
+) => {
+  try {
+    const { cvText } = req.body;
+
+    const skills =
+      extractSkills(cvText);
+
+    res.json({
+      skills,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 const analyzeCV = async (
   req,
   res
@@ -67,4 +87,5 @@ const analyzeCV = async (
 
 module.exports = {
   analyzeCV,
+  analyzeTextCV,
 };

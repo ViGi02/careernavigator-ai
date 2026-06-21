@@ -8,6 +8,7 @@ from "../context/AuthContext";
 
 import {
   analyzeCV,
+  analyzeCVText,
 } from "../services/cvService";
 
 import {
@@ -21,6 +22,9 @@ function CVAnalyzer() {
 
   const [file, setFile] =
     useState(null);
+
+  const [cvText, setCvText] =
+    useState("");
 
   const [result, setResult] =
     useState(null);
@@ -63,6 +67,23 @@ function CVAnalyzer() {
       }
     };
 
+  const handleTextAnalysis =
+    async () => {
+      if (!cvText.trim()) return;
+
+      try {
+        const data =
+          await analyzeCVText(
+            cvText,
+            user.token
+          );
+
+        setResult(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
   return (
     <div className="p-6">
 
@@ -80,12 +101,28 @@ function CVAnalyzer() {
         }
       />
 
-      <button
-        onClick={handleUpload}
-        className="bg-blue-600 text-white px-4 py-2 rounded ml-4"
-      >
-        Analyze CV
-      </button>
+      <div className="mt-8">
+        <h2 className="font-bold mb-2">
+          Or Paste CV Text
+        </h2>
+
+        <textarea
+          value={cvText}
+          onChange={(e) =>
+            setCvText(e.target.value)
+          }
+          rows="10"
+          className="w-full border rounded p-3"
+          placeholder="Paste your CV here..."
+        />
+
+        <button
+          onClick={handleTextAnalysis}
+          className="bg-purple-600 text-white px-4 py-2 rounded mt-4"
+        >
+          Analyze Pasted CV
+        </button>
+      </div>
 
       {result && (
         <div className="mt-6">
