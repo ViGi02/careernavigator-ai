@@ -5,6 +5,7 @@ const {
   addSkill,
   deleteSkill,
   updateCareerGoal,
+  addMultipleSkills,
 } = require("../controllers/userController");
 
 const {
@@ -20,5 +21,7 @@ router.post("/skills", protect, addSkill);
 router.delete("/skills", protect, deleteSkill);
 
 router.put("/career-goal", protect, updateCareerGoal);
+
+router.post("/skills/bulk", protect, addMultipleSkills);
 
 module.exports = router;

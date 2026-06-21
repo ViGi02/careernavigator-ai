@@ -70,3 +70,22 @@ export const updateCareerGoal =
 
     return response.data;
   };
+
+export const addMultipleSkills =
+  async (
+    skills,
+    token
+  ) => {
+    const response =
+      await axios.post(
+        `${API_URL}/skills/bulk`,
+        { skills },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+    return response.data;
+  };

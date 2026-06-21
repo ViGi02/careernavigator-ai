@@ -78,9 +78,37 @@ const updateCareerGoal = async (
   }
 };
 
+const addMultipleSkills = async (
+  req,
+  res
+) => {
+  try {
+    const { skills } = req.body;
+
+    const user = await User.findById(
+      req.user.id
+    );
+
+    skills.forEach((skill) => {
+      if (!user.skills.includes(skill)) {
+        user.skills.push(skill);
+      }
+    });
+
+    await user.save();
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getProfile,
   addSkill,
   deleteSkill,
   updateCareerGoal,
+  addMultipleSkills,
 };

@@ -10,6 +10,10 @@ import {
   analyzeCV,
 } from "../services/cvService";
 
+import {
+  addMultipleSkills,
+} from "../services/userService";
+
 function CVAnalyzer() {
 
   const { user } =
@@ -40,6 +44,22 @@ function CVAnalyzer() {
 
         console.log(error);
 
+      }
+    };
+
+  const saveSkillsToProfile =
+    async () => {
+      try {
+        await addMultipleSkills(
+          result.skills,
+          user.token
+        );
+
+        console.log(
+          "Skills added successfully"
+        );
+      } catch (error) {
+        console.log(error);
       }
     };
 
@@ -84,6 +104,12 @@ function CVAnalyzer() {
             )}
           </ul>
 
+          <button
+            onClick={saveSkillsToProfile}
+            className="bg-green-600 text-white px-4 py-2 rounded mt-4"
+          >
+            Add Skills To Profile
+          </button>
         </div>
       )}
 
