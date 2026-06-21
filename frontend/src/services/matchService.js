@@ -19,3 +19,20 @@ export const analyzeMatch = async (
 
   return response.data;
 };
+
+export const getMatchHistory =
+  async (token) => {
+
+    const response =
+      await axios.get(
+        `${API_URL}/history`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`,
+          },
+        }
+      );
+
+    return response.data;
+};

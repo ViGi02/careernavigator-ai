@@ -75,7 +75,7 @@ function JobMatcher() {
 
           <div className="mt-4">
             <h3 className="font-bold">
-              Matched Skills
+              Matched Technical Skills
             </h3>
 
             <ul>
@@ -91,7 +91,7 @@ function JobMatcher() {
 
           <div className="mt-4">
             <h3 className="font-bold">
-              Missing Skills
+              Missing Technical Skills
             </h3>
 
             <ul>
@@ -104,6 +104,30 @@ function JobMatcher() {
               )}
             </ul>
           </div>
+        </div>
+      )}
+
+      {results?.alignment && (
+        <div className="mt-4">
+          <h3 className="font-bold">
+            Career Alignment
+          </h3>
+
+          <p>
+            {results.alignment}
+          </p>
+        </div>
+      )}
+
+      {results?.assessment && (
+        <div className="mt-4 bg-blue-50 p-4 rounded">
+          <h3 className="font-bold">
+            Assessment
+          </h3>
+
+          <p>
+            {results.assessment}
+          </p>
         </div>
       )}
 
