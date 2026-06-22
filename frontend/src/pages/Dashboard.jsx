@@ -21,6 +21,7 @@ function Dashboard() {
   const [goalProgress, setGoalProgress] = useState(null);
   const [bestJob, setBestJob] = useState(null);
   const [prioritySkills, setPrioritySkills] = useState([]);
+  const [skillImpact, setSkillImpact] = useState([]);
 
   useEffect(() => {
     if (!user) return;
@@ -42,7 +43,7 @@ function Dashboard() {
         setRecommendations(recommendationData.recommendations);
         setGoalProgress(progressData);
         setPrioritySkills(insightsData.prioritySkills);
-
+        setSkillImpact(insightsData.impactAnalysis);
         if (
           jobsData.length > 0
         ) {
@@ -344,6 +345,48 @@ function Dashboard() {
                   {" "}
                   ({item.count} jobs)
                 </p>
+
+              ))
+
+          )}
+
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow md:col-span-3">
+
+          <h2 className="text-xl font-bold mb-4">
+            Skill Impact Analysis
+          </h2>
+
+          {skillImpact.length === 0 ? (
+
+            <p>
+              No impact analysis yet.
+            </p>
+
+          ) : (
+
+            skillImpact
+              .slice(0, 3)
+              .map((item) => (
+
+                <div
+                  key={item.skill}
+                  className="mb-4"
+                >
+
+                  <p className="font-bold">
+                    🚀 {item.skill}
+                  </p>
+
+                  <p>
+                    Helps with{" "}
+                    {
+                      item.affectedJobs.length
+                    } jobs
+                  </p>
+
+                </div>
 
               ))
 

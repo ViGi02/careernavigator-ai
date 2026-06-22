@@ -150,6 +150,46 @@ function CVAnalyzer() {
         </div>
       )}
 
+      {result.summary && (
+        <div className="mt-6">
+
+          <h2 className="font-bold text-xl">
+            AI Summary
+          </h2>
+
+          <p>
+            {result.summary}
+          </p>
+
+        </div>
+      )}
+
+      {result.strengths?.length > 0 && (
+
+        <div className="mt-6">
+
+          <h2 className="font-bold">
+            Strengths
+          </h2>
+
+          <ul>
+
+            {result.strengths.map(
+              (strength) => (
+
+                <li key={strength}>
+                  ✅ {strength}
+                </li>
+
+              )
+            )}
+
+          </ul>
+
+        </div>
+
+      )}
+
       {result.categories && (
         <div className="mt-6">
 
@@ -221,6 +261,53 @@ function CVAnalyzer() {
             )}
           </ul>
 
+        </div>
+      )}
+
+      {result.growthAreas?.length > 0 && (
+
+        <div className="mt-6">
+
+          <h2 className="font-bold">
+            Growth Areas
+          </h2>
+
+          <ul>
+
+            {result.growthAreas.map(
+              (skill) => (
+                <li key={skill}>
+                  ⚠ {skill}
+                </li>
+              )
+            )}
+
+          </ul>
+
+        </div>
+
+      )}
+
+      {result.careerPaths?.length > 0 && (
+
+        <div className="mt-6">
+
+          <h2 className="font-bold">
+            Suggested Career Paths
+          </h2>
+
+          <ul>
+
+            {result.careerPaths.map(
+              (path) => (
+
+                <li key={path}>
+                  🎯 {path}
+                </li>
+
+              )
+            )}
+          </ul>
         </div>
       )}
     </div>

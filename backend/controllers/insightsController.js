@@ -6,6 +6,11 @@ const prioritizeSkills =
     "../services/prioritizeSkills"
   );
 
+const calculateSkillImpact =
+  require(
+    "../services/skillImpactAnalysis"
+  );
+
 const getInsights =
   async (req, res) => {
 
@@ -20,9 +25,15 @@ const getInsights =
         prioritizeSkills(
           jobs
         );
+        
+      const impactAnalysis =
+        calculateSkillImpact(
+          jobs
+        );
 
       res.json({
         prioritySkills,
+        impactAnalysis,
       });
 
     } catch (error) {

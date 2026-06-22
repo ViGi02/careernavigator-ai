@@ -19,6 +19,11 @@ const recommendSkills =
     "../services/recommendSkills"
   );
 
+const analyzeCVWithAI =
+  require(
+    "../services/aiCVAnalysis"
+  );
+
 const analyzeTextCV = async (
   req,
   res
@@ -29,8 +34,35 @@ const analyzeTextCV = async (
     const skills =
       extractSkills(cvText);
 
+    const categories =
+      categorizeSkills(skills);
+
+    const recommendations =
+      recommendSkills(categories);
+
+    const aiAnalysis =
+      analyzeCVWithAI(
+        skills,
+        categories,
+        recommendations
+      );
+
     res.json({
       skills,
+      categories,
+      recommendations,
+
+      summary:
+        aiAnalysis.summary,
+
+      strengths:
+        aiAnalysis.strengths,
+
+      growthAreas:
+        aiAnalysis.growthAreas,
+
+      careerPaths:
+        aiAnalysis.careerPaths,
     });
   } catch (error) {
     res.status(500).json({
@@ -86,6 +118,13 @@ const analyzeCV = async (
     const recommendations =
       recommendSkills(categories);
 
+    const aiAnalysis =
+      analyzeCVWithAI(
+        skills,
+        categories,
+        recommendations
+      );
+
     res.json({
       extractedText:
         text.substring(
@@ -95,6 +134,18 @@ const analyzeCV = async (
       skills,
       categories,
       recommendations,
+
+      summary:
+        aiAnalysis.summary,
+
+      strengths:
+        aiAnalysis.strengths,
+
+      growthAreas:
+        aiAnalysis.growthAreas,
+
+      careerPaths:
+        aiAnalysis.careerPaths,
     });
   } catch (error) {
     res.status(500).json({
