@@ -27,7 +27,16 @@ function CVAnalyzer() {
     useState("");
 
   const [result, setResult] =
-    useState(null);
+    useState({
+      skills: [],
+      recommendations: [],
+      strengths: [],
+      growthAreas: [],
+      careerPaths: [],
+      categories: null,
+      summary: "",
+    }
+  );
 
   const handleUpload =
     async () => {
@@ -55,7 +64,7 @@ function CVAnalyzer() {
     async () => {
       try {
         await addMultipleSkills(
-          result.skills,
+          result?.skills,
           user.token
         );
 
@@ -101,6 +110,13 @@ function CVAnalyzer() {
         }
       />
 
+      <button
+        onClick={handleUpload}
+        className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
+      >
+        Analyze Uploaded CV
+      </button>
+
       <div className="mt-8">
         <h2 className="font-bold mb-2">
           Or Paste CV Text
@@ -132,7 +148,7 @@ function CVAnalyzer() {
           </h2>
 
           <ul>
-            {result.skills.map(
+            {result?.skills.map(
               (skill) => (
                 <li key={skill}>
                   ✅ {skill}
@@ -150,7 +166,7 @@ function CVAnalyzer() {
         </div>
       )}
 
-      {result.summary && (
+      {result?.summary && (
         <div className="mt-6">
 
           <h2 className="font-bold text-xl">
@@ -158,13 +174,13 @@ function CVAnalyzer() {
           </h2>
 
           <p>
-            {result.summary}
+            {result?.summary}
           </p>
 
         </div>
       )}
 
-      {result.strengths?.length > 0 && (
+      {result?.strengths?.length > 0 && (
 
         <div className="mt-6">
 
@@ -174,7 +190,7 @@ function CVAnalyzer() {
 
           <ul>
 
-            {result.strengths.map(
+            {result?.strengths.map(
               (strength) => (
 
                 <li key={strength}>
@@ -190,7 +206,7 @@ function CVAnalyzer() {
 
       )}
 
-      {result.categories && (
+      {result?.categories && (
         <div className="mt-6">
 
           <h2 className="text-xl font-bold">
@@ -204,7 +220,7 @@ function CVAnalyzer() {
             </p>
 
             <ul>
-              {result.categories.frontend.map(
+              {result?.categories?.frontend.map(
                 (skill) => (
                   <li key={skill}>
                     ✅ {skill}
@@ -218,7 +234,7 @@ function CVAnalyzer() {
             </p>
 
             <ul>
-              {result.categories.backend.map(
+              {result?.categories?.backend.map(
                 (skill) => (
                   <li key={skill}>
                     ✅ {skill}
@@ -232,7 +248,7 @@ function CVAnalyzer() {
             </p>
 
             <ul>
-              {result.categories.database.map(
+              {result?.categories?.database.map(
                 (skill) => (
                   <li key={skill}>
                     ✅ {skill}
@@ -244,7 +260,7 @@ function CVAnalyzer() {
         </div>
       )}
 
-      {result.recommendations?.length > 0 && (
+      {result?.recommendations?.length > 0 && (
         <div className="mt-6">
 
           <h2 className="font-bold">
@@ -252,7 +268,7 @@ function CVAnalyzer() {
           </h2>
 
           <ul>
-            {result.recommendations.map(
+            {result?.recommendations.map(
               (skill) => (
                 <li key={skill}>
                   ⚠ {skill}
@@ -264,7 +280,7 @@ function CVAnalyzer() {
         </div>
       )}
 
-      {result.growthAreas?.length > 0 && (
+      {result?.growthAreas?.length > 0 && (
 
         <div className="mt-6">
 
@@ -274,7 +290,7 @@ function CVAnalyzer() {
 
           <ul>
 
-            {result.growthAreas.map(
+            {result?.growthAreas?.map(
               (skill) => (
                 <li key={skill}>
                   ⚠ {skill}
@@ -288,7 +304,7 @@ function CVAnalyzer() {
 
       )}
 
-      {result.careerPaths?.length > 0 && (
+      {result?.careerPaths?.length > 0 && (
 
         <div className="mt-6">
 
@@ -298,7 +314,7 @@ function CVAnalyzer() {
 
           <ul>
 
-            {result.careerPaths.map(
+            {result?.careerPaths?.map(
               (path) => (
 
                 <li key={path}>

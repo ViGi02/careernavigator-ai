@@ -19,9 +19,9 @@ const recommendSkills =
     "../services/recommendSkills"
   );
 
-const analyzeCVWithAI =
+const analyzeCVAI =
   require(
-    "../services/aiCVAnalysis"
+    "../services/openAIService"
   );
 
 const analyzeTextCV = async (
@@ -41,10 +41,9 @@ const analyzeTextCV = async (
       recommendSkills(categories);
 
     const aiAnalysis =
-      analyzeCVWithAI(
-        skills,
-        categories,
-        recommendations
+      await analyzeCVAI(
+        cvText,
+        skills
       );
 
     res.json({
@@ -119,10 +118,9 @@ const analyzeCV = async (
       recommendSkills(categories);
 
     const aiAnalysis =
-      analyzeCVWithAI(
-        skills,
-        categories,
-        recommendations
+      await analyzeCVAI(
+        text,
+        skills
       );
 
     res.json({
