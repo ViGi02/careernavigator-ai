@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { analyzeMatch } from "../services/matchService";
 import { generateRoadmap, saveRoadmap } from "../services/roadmapService";
+import { saveJob } from "../services/jobService";
 
 function JobMatcher() {
   const [jobDescription, setJobDescription] =
@@ -39,6 +40,38 @@ function JobMatcher() {
       console.log(error);
     }
   };
+  
+  const handleSaveJob =
+    async () => {
+
+      try {
+
+        const title =
+          jobDescription
+            .split("\n")
+            .find(
+              (line) =>
+                line.trim().length > 5
+            )
+            || "Saved Job";
+
+        await saveJob(
+          title,
+          jobDescription,
+          user.token
+        );
+
+        alert(
+          "Job saved"
+        );
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    };
 
   const handleSaveRoadmap =
     async () => {
@@ -86,6 +119,23 @@ function JobMatcher() {
         className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
       >
         Analyze Match
+      </button>
+
+      <button
+        onClick={
+          handleSaveJob
+        }
+        className="
+          bg-green-600
+          text-white
+          px-4
+          py-2
+          rounded
+          mt-4
+          ml-2
+        "
+      >
+        Save Job
       </button>
 
       {results && (

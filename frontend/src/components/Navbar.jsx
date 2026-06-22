@@ -39,6 +39,13 @@ function Navbar() {
         My Roadmaps
       </Link>
 
+      <Link
+        to="/jobs"
+        className="text-white"
+      >
+        My Jobs
+      </Link>
+
       {user && (
         <button onClick={handleLogout}>
           Logout

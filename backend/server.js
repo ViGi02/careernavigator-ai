@@ -9,6 +9,10 @@ const userRoutes = require("./routes/userRoutes");
 const matchRoutes = require("./routes/matchRoutes");
 const roadmapRoutes = require("./routes/roadmapRoutes");
 const cvRoutes = require("./routes/cvRoutes");
+const recommendationRoutes = require("./routes/recommendationRoutes");
+const careerGoalRoutes = require("./routes/careerGoalRoutes");
+const jobRoutes = require("./routes/jobRoutes");
+const insightRoutes = require("./routes/insightRoutes");
 
 dotenv.config();
 
@@ -24,6 +28,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/match", matchRoutes);
 app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/cv", cvRoutes);
+app.use("/api/recommendations", recommendationRoutes);
+app.use("/api/career-goal", careerGoalRoutes);
+app.use("/api/jobs", jobRoutes);
+app.use("/api/insights", insightRoutes);
 
 app.get("/", (req, res) => {
   res.send("CareerNavigator API Running");

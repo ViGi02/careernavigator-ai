@@ -7,6 +7,8 @@ import Profile from "./pages/Profile";
 import JobMatcher from "./pages/JobMatcher";
 import CVAnalyzer from "./pages/CVAnalyzer";
 import MyRoadmaps from "./pages/MyRoadmaps";
+import MyJobs from "./pages/MyJobs";
+import JobDetails from "./pages/JobDetails";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -57,6 +59,24 @@ function App() {
           element={
             <ProtectedRoute>
               <MyRoadmaps />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/jobs"
+          element={
+            <ProtectedRoute>
+              <MyJobs />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/jobs/:id"
+          element={
+            <ProtectedRoute>
+              <JobDetails />
             </ProtectedRoute>
           }
         />
